@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>OWASP Top 10 - #5 Broken access control</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/css/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/css/theme/black.css"
+      id="theme"
+    />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>OWASP Top 10</h1>
+          <h2>#5</h2>
+          <h2>Broken access control</h2>
+        </section>
+
+        <section>
+            <h1>Description</h1>
+            <p>Broken or missing access control allows users to act outside of their intended permissions.</p>
+            <p>This can lead to unathorized information disclosure, modification or destruction of data or users performing actions outside their limits.</p>
+        </section>
+
+        <section>
+            <section>
+                <h1>Common access control vulnerabilities</h1>
+            </section>
+            <section>
+                <h2>Bypassing access control checks</h2>
+                <ul>
+                    <li>by modifiyng URL</li>
+                    <li>app state</li>
+                    <li>HTML page</li>
+                    <li>using API attack tool</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Changing primary key</h2>
+                <p>to another user's record, permitting view or modification of someone else's acc</p>
+            </section>
+            <section>
+                <h2>Priviledge escalation</h2>
+                <p></p>acting as user without login, or as admin as a reguraluser</p>
+            </section>
+            <section>
+                <h2>Metadata manipulation</h2>
+                <ul>
+                    <li>tampering JWT or access controls tokens</li>
+                    <li>modifing coockies</li>
+                    <li>manipulating hidden field</li>
+                    <li>abusing JWT invalidation</li></li>
+                </ul>
+            </section>
+            <section>
+                <h2>CORS misconfiguration</h2>
+                <p>allowing unauthorized API access</p>
+            </section>
+            <section>
+                <h2>Force browsing</h2>
+                <p>to authenticated pages as an unauthenticated user or to privileged pages as a standard user</p>
+            </section>
+            <section>
+                <h2>Accessing unprotected API</h2>
+                <p>with missing access controls for POST, PUT and DELETE.</p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h1>Examples</h1>
+            </section>
+            <section>
+                <h2>Bank account URL</h2>
+                <pre>https://safe.bank/dashboard.py?accountId=4462</pre>
+                <h3>Returns</h3>
+                <pre><code>{“AccountID”: 4462, “Balance”: “$123,456.78”}</code></pre>
+            </section>
+            <section>
+                <h2>With changed parameter</h2>
+                <pre>https://safe.bank/dashboard.py?accountId=4463</pre>
+                <h3>Returns</h3>
+                <pre><code>{“AccountID”: 4463, “Balance”: “$167,183.09”}</code></pre>
+            </section>
+            <section>
+                <h2>Code comment revealing function</h2>
+                <pre><code>
+JQuery to perform several actions:
+•	Load account balance data
+•	Load transaction data
+•	If user is customer support a search field will appear. 
+    o	Queries /customer_search.py
+    o	Parameters (optional): accountID, customerID, transactionDate
+                </code></pre>
+            </section>
+            <section>
+                <pre><code>https://safe.bank/customer_search.py?limit=5</code></pre>
+                <h3>Returns</h3>
+                <pre><code>
+[
+    “CustomerID”: 10, {“AccountID”: 4462, “Balance”: “$1502.00”}, 
+    “CustomerID”: 11, {“AccountID”: 4463, “Balance”: “$167,183.09”}, 
+    “CustomerID”: 12, {“AccountID”: 4464, “Balance”: “$500,023.09”}, 
+    “CustomerID”: 13, {“AccountID”: 4465, “Balance”: “$167,183.09”},
+    “CustomerID”: 14, {“AccountID”: 4466, “Balance”: “$167,183.09”, “AccountID”: 4470, “Balance”: “$1,054.32”}
+]     
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Prevention</h1>
+            </section>
+            <section>
+                <h2>With the exception of public resources, deny by default</h2>
+            </section>
+            <section>
+                <h2>Implement access control mechanisms once</h2>
+                <p>re-use them throughout the application, including minimizing CORS usage</p>
+            </section>
+            <section>
+                <h2>Enforce record ownership</h2>
+                <p>Model access controls should enforce record ownership, rather than accepting that the user can create, read, update, or delete any record.</p>
+            </section>
+            <section>
+                <h2>Log access control failures</h2>
+            </section>
+            <section>
+                <h2>Rate limit API and controller access</h2>
+                <p>prevents using automated tooling for attack</p>
+            </section>
+            <section>
+                <h2>JWT tokens should be invalidated on the server after logout</h2>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Useful resources</h1>
+            </section>
+            <section>
+                <h2>OWASP documentation</h2>
+                <ul>
+                    <li>https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A5-Broken_Access_Control</li>
+                    <li>https://owasp.org/www-project-proactive-controls/v3/en/c7-enforce-access-controls</li>
+                    <li>https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/01-Testing_Directory_Traversal_File_Include.html</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Emaple apps to try</h2>
+                <ul>
+                    <li>http://www.dvwa.co.uk/</li>
+                    <li>https://github.com/bkimminich/juice-shop</li>
+                    <li>https://github.com/rapid7/metasploitable3/</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <h1>DEMO TIME!</h1>
+        </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        transition: "slide", // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          {
+            src: "plugin/markdown/marked.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          {
+            src: "plugin/markdown/markdown.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          { src: "plugin/highlight/highlight.js", async: true },
+          { src: "plugin/search/search.js", async: true },
+          { src: "plugin/zoom-js/zoom.js", async: true },
+          { src: "plugin/notes/notes.js", async: true },
+        ],
+      });
+    </script>
+  </body>
+</html>
