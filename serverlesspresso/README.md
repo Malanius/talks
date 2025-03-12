@@ -130,7 +130,7 @@ Following costs is for 1000 orders per day:
 
 ## Resources
 
-- [Slides](https://github.com/Malanius/talks/serverlesspresso)
+- [Slides](https://github.com/Malanius/talks/tree/main/serverlesspresso)
 - [Serverlesspresso Workshop](https://catalog.workshops.aws/serverlesspresso/)
 - made with [reveal.js](https://revealjs.com/)
 
