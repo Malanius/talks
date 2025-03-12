@@ -74,7 +74,7 @@ Architecture overview of state of the art serverless, event-driven application t
 
 `-`
 
-### Overall architecture!
+### Overall architecture
 
 ![architecture!](images/diagrams/architecture.png)
 
@@ -102,7 +102,7 @@ Architecture overview of state of the art serverless, event-driven application t
 
 `-`
 
-### Let's dive to the step functions!
+### Let's dive to the step functions
 
 ---
 
@@ -128,9 +128,14 @@ Following costs is for 1000 orders per day:
 
 ---
 
+## ? Questions ?
+
+---
+
 ## Resources
 
 - [Slides](https://github.com/Malanius/talks/tree/main/serverlesspresso)
+- [Serverlesspresso event catalog](https://serverlesscoffee.com/)
 - [Serverlesspresso Workshop](https://catalog.workshops.aws/serverlesspresso/)
 - made with [reveal.js](https://revealjs.com/)
 
