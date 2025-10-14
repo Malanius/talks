@@ -14,27 +14,39 @@ app.use(
 // Serve static files from presentations directories
 app.use("/presentations", express.static(__dirname));
 
-// Serve the main presentation loader
+// Serve the main index page
 app.get("/", (req, res) => {
-  const presentation = req.query.p;
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
-  // If no presentation specified, serve the index page
-  if (!presentation) {
-    return res.sendFile(path.join(__dirname, "index.html"));
+// Serve individual presentations
+app.get("/:presentation", (req, res, next) => {
+  const presentation = req.params.presentation;
+
+  // Skip if this is a static asset request or special file
+  if (
+    req.path.includes(".") ||
+    presentation === "favicon.ico" ||
+    presentation === "presentations" ||
+    presentation === "reveal.js" ||
+    presentation === "debug-images.html"
+  ) {
+    return next();
   }
 
   // Check if presentation directory exists
   const presentationPath = path.join(__dirname, presentation);
   if (!fs.existsSync(presentationPath)) {
     return res.status(404).send(`
-      <h1>Presentation not found</h1>
+      <h1>Presentation "${presentation}" not found</h1>
       <p>Available presentations:</p>
       <ul>
-        <li><a href="/?p=nodejs-intro">Node.js Introduction</a></li>
-        <li><a href="/?p=typescript-intro">TypeScript Introduction</a></li>
-        <li><a href="/?p=serverlesspresso">Serverlesspresso</a></li>
-        <li><a href="/?p=broken-access-control">Broken Access Control</a></li>
+        <li><a href="/nodejs-intro">Node.js Introduction</a></li>
+        <li><a href="/typescript-intro">TypeScript Introduction</a></li>
+        <li><a href="/serverlesspresso">Serverlesspresso</a></li>
+        <li><a href="/broken-access-control">Broken Access Control</a></li>
       </ul>
+      <p><a href="/">← Back to main page</a></p>
     `);
   }
 
@@ -237,15 +249,15 @@ app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`Available presentations:`);
   console.log(
-    `  - Node.js Introduction: http://localhost:${PORT}/?p=nodejs-intro`
+    `  - Node.js Introduction: http://localhost:${PORT}/nodejs-intro`
   );
   console.log(
-    `  - TypeScript Introduction: http://localhost:${PORT}/?p=typescript-intro`
+    `  - TypeScript Introduction: http://localhost:${PORT}/typescript-intro`
   );
   console.log(
-    `  - Serverlesspresso: http://localhost:${PORT}/?p=serverlesspresso`
+    `  - Serverlesspresso: http://localhost:${PORT}/serverlesspresso`
   );
   console.log(
-    `  - Broken Access Control: http://localhost:${PORT}/?p=broken-access-control`
+    `  - Broken Access Control: http://localhost:${PORT}/broken-access-control`
   );
 });
