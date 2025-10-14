@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        h1 {
+            color: #42affa;
+            text-align: center;
+        }
+        .presentation-list {
+            list-style: none;
+            padding: 0;
+        }
+        .presentation-item {
+            background: #2d2d2d;
+            margin: 1rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .presentation-link {
+            display: block;
+            padding: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .presentation-link:hover {
+            background: #3d3d3d;
+        }
+        .presentation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .presentation-description {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .instructions {
+            background: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .instructions h2 {
+            color: #42affa;
+            margin-top: 0;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Presentations</h1>
+    
+    <ul class="presentation-list">
+        <li class="presentation-item">
+            <a href="/?p=nodejs-intro" class="presentation-link">
+                <div class="presentation-title">Node.js Introduction</div>
+                <div class="presentation-description">JavaScript on the server - fundamentals and getting started</div>
+            </a>
+        </li>
+        
+        <li class="presentation-item">
+            <a href="/?p=typescript-intro" class="presentation-link">
+                <div class="presentation-title">TypeScript Introduction</div>
+                <div class="presentation-description">Adding types to JavaScript for better development experience</div>
+            </a>
+        </li>
+        
+        <li class="presentation-item">
+            <a href="/?p=serverlesspresso" class="presentation-link">
+                <div class="presentation-title">Serverlesspresso</div>
+                <div class="presentation-description">Serverless architecture and coffee ordering system</div>
+            </a>
+        </li>
+        
+        <li class="presentation-item">
+            <a href="/?p=broken-access-control" class="presentation-link">
+                <div class="presentation-title">OWASP Top 10 - Broken Access Control</div>
+                <div class="presentation-description">Security vulnerabilities in access control systems</div>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="instructions">
+        <h2>🚀 Getting Started</h2>
+        <p>To run the presentations:</p>
+        <ol>
+            <li>Install dependencies: <code>npm install</code></li>
+            <li>Start the server: <code>npm start</code></li>
+            <li>Open <code>http://localhost:3000</code> in your browser</li>
+        </ol>
+        
+        <h2>📝 Adding New Presentations</h2>
+        <p>To add a new presentation:</p>
+        <ol>
+            <li>Create a new directory with your presentation name</li>
+            <li>Add a <code>README.md</code> file with your markdown content</li>
+            <li>Use <code>---</code> for horizontal slides and <code>`-`</code> or <code>---</code> for vertical slides</li>
+            <li>Access it via <code>/?p=your-presentation-name</code></li>
+        </ol>
+        
+        <h2>🎯 Features</h2>
+        <ul>
+            <li>Full reveal.js feature set (notes, search, zoom, math, etc.)</li>
+            <li>Markdown-based presentations</li>
+            <li>Syntax highlighting</li>
+            <li>Speaker notes</li>
+            <li>Custom CSS support</li>
+            <li>Image and asset serving</li>
+        </ul>
+    </div>
+</body>
+</html>
