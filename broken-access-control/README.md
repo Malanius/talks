@@ -1,5 +1,7 @@
 # OWASP Top 10
+
 ## #5
+
 ## Broken access control
 
 ---
@@ -167,18 +169,18 @@ prevents using automated tooling for attack
 
 ## OWASP documentation
 
-- https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A5-Broken_Access_Control
-- https://owasp.org/www-project-proactive-controls/v3/en/c7-enforce-access-controls
-- https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/01-Testing_Directory_Traversal_File_Include.html
+- <https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A5-Broken_Access_Control>
+- <https://owasp.org/www-project-proactive-controls/v3/en/c7-enforce-access-controls>
+- <https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/01-Testing_Directory_Traversal_File_Include.html>
 
 `-`
 
 ## Example apps to try
 
-- http://www.dvwa.co.uk/
-- https://github.com/bkimminich/juice-shop
-- https://github.com/rapid7/metasploitable3/
+- <http://www.dvwa.co.uk/>
+- <https://github.com/bkimminich/juice-shop>
+- <https://github.com/rapid7/metasploitable3/>
 
 ---
 
-# DEMO TIME!
+# DEMO TIME

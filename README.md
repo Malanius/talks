@@ -5,16 +5,19 @@ A centralized reveal.js setup for hosting multiple markdown-based presentations 
 ## 🚀 Quick Start
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Start the server**:
+
    ```bash
    npm start
    ```
 
 3. **Open in browser**:
+
    ```
    http://localhost:3000
    ```
@@ -22,13 +25,14 @@ A centralized reveal.js setup for hosting multiple markdown-based presentations 
 ## 📊 Available Presentations
 
 - **Node.js Introduction**: `http://localhost:3000/?p=nodejs-intro` (2020-09 @ Frontend Chapter meeting, Assist)
-- **TypeScript Introduction**: `http://localhost:3000/?p=typescript-intro` (2020-06 @ Frontend Chapter meeting, Assist) 
+- **TypeScript Introduction**: `http://localhost:3000/?p=typescript-intro` (2020-06 @ Frontend Chapter meeting, Assist)
 - **Serverlesspresso**: `http://localhost:3000/?p=serverlesspresso` (2025-03-12 @ Vacasa Talks, Vacasa Prague)
 - **OWASP Broken Access Control**: `http://localhost:3000/?p=broken-access-control` (2020 @ Security Chapter meeting, Assist)
 
 ## 🛠 Development
 
 For development with auto-reload:
+
 ```bash
 npm run dev
 ```
@@ -36,11 +40,13 @@ npm run dev
 ## 📝 Creating New Presentations
 
 1. **Create a new directory** with your presentation name:
+
    ```bash
    mkdir my-new-presentation
    ```
 
 2. **Add a README.md file** with your markdown content:
+
    ```markdown
    # My Presentation Title
    
@@ -60,6 +66,7 @@ npm run dev
    ```
 
 3. **Access your presentation**:
+
    ```
    http://localhost:3000/?p=my-new-presentation
    ```
@@ -72,7 +79,8 @@ npm run dev
 - **Code highlighting**: Use fenced code blocks with language specification
 - **Math**: Use KaTeX syntax with `$` for inline or `$$` for block math
 
-### Example structure:
+### Example structure
+
 ```markdown
 # Title Slide
 
@@ -103,6 +111,7 @@ These are speaker notes that won't be visible to the audience
 def hello_world():
     print("Hello, World!")
 ```
+
 ```
 
 ## 🎨 Customization
@@ -118,6 +127,7 @@ Add a `css/custom.css` file in your presentation directory for custom styles:
 ```
 
 ### Images and Assets
+
 Place images in your presentation directory and reference them relatively:
 
 ```markdown
@@ -125,6 +135,7 @@ Place images in your presentation directory and reference them relatively:
 ```
 
 ### Themes
+
 The default theme is `black`. You can modify the server to use different themes or add theme selection.
 
 ## 🎯 Features
@@ -144,6 +155,7 @@ The default theme is `black`. You can modify the server to use different themes 
 ## 🔧 Advanced Configuration
 
 The `server.js` file can be modified to:
+
 - Add authentication
 - Change default themes per presentation
 - Add custom reveal.js configurations
@@ -180,18 +192,21 @@ talks/
 For production deployment:
 
 1. **Set environment variables**:
+
    ```bash
    export PORT=80
    export NODE_ENV=production
    ```
 
 2. **Use process manager** (PM2, forever, etc.):
+
    ```bash
    npm install -g pm2
    pm2 start server.js --name presentations
    ```
 
 3. **Reverse proxy** (nginx, Apache) for domain and SSL:
+
    ```nginx
    location / {
        proxy_pass http://localhost:3000;

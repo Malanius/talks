@@ -1,31 +1,33 @@
 /* Custom styles for Node.js presentation */
-.reveal h1, .reveal h2, .reveal h3 {
-    color: #68cc68; /* Node.js green */
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: #68cc68; /* Node.js green */
 }
 
 .reveal .progress {
-    color: #68cc68;
+  color: #68cc68;
 }
 
 .reveal pre {
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .reveal code {
-    background-color: #1e1e1e;
-    color: #9cdcfe;
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
+  background-color: #1e1e1e;
+  color: #9cdcfe;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
 }
 
 /* Custom slide background for Node.js logo or patterns */
 .node-slide {
-    background: linear-gradient(45deg, #68cc68 0%, #44aa44 100%) !important;
-    color: white !important;
+  background: linear-gradient(45deg, #68cc68 0%, #44aa44 100%) !important;
+  color: white !important;
 }
 
 /* Style for code blocks */
 .reveal .hljs {
-    background: #1e1e1e;
-    border: 1px solid #333;
+  background: #1e1e1e;
+  border: 1px solid #333;
 }

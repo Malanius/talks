@@ -1,25 +1,28 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve static files from node_modules/reveal.js
-app.use('/reveal.js', express.static(path.join(__dirname, 'node_modules/reveal.js')));
+app.use(
+  "/reveal.js",
+  express.static(path.join(__dirname, "node_modules/reveal.js"))
+);
 
 // Serve static files from presentations directories
-app.use('/presentations', express.static(__dirname));
+app.use("/presentations", express.static(__dirname));
 
 // Serve the main presentation loader
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   const presentation = req.query.p;
-  
+
   // If no presentation specified, serve the index page
   if (!presentation) {
-    return res.sendFile(path.join(__dirname, 'index.html'));
+    return res.sendFile(path.join(__dirname, "index.html"));
   }
-  
+
   // Check if presentation directory exists
   const presentationPath = path.join(__dirname, presentation);
   if (!fs.existsSync(presentationPath)) {
@@ -36,55 +39,99 @@ app.get('/', (req, res) => {
   }
 
   // Check if README.md exists
-  const readmePath = path.join(presentationPath, 'README.md');
+  const readmePath = path.join(presentationPath, "README.md");
   const hasMarkdown = fs.existsSync(readmePath);
-  
+
   // Generate the HTML
   const html = generatePresentationHTML(presentation, hasMarkdown);
   res.send(html);
 });
 
 // Serve individual presentation assets
-app.use('/:presentation/images', (req, res, next) => {
+app.use("/:presentation/images", (req, res, next) => {
   const presentation = req.params.presentation;
-  express.static(path.join(__dirname, presentation, 'images'))(req, res, next);
-});
-
-app.use('/:presentation/assets', (req, res, next) => {
-  const presentation = req.params.presentation;
-  express.static(path.join(__dirname, presentation, 'assets'))(req, res, next);
-});
-
-// Serve markdown files
-app.get('/:presentation/README.md', (req, res) => {
-  const presentation = req.params.presentation;
-  const markdownPath = path.join(__dirname, presentation, 'README.md');
-  
-  if (fs.existsSync(markdownPath)) {
-    res.sendFile(markdownPath);
+  const imagesPath = path.join(__dirname, presentation, "images");
+  if (fs.existsSync(imagesPath)) {
+    express.static(imagesPath)(req, res, next);
   } else {
-    res.status(404).send('Markdown file not found');
+    res.status(404).send("Image not found");
+  }
+});
+
+app.use("/:presentation/assets", (req, res, next) => {
+  const presentation = req.params.presentation;
+  const assetsPath = path.join(__dirname, presentation, "assets");
+  if (fs.existsSync(assetsPath)) {
+    express.static(assetsPath)(req, res, next);
+  } else {
+    res.status(404).send("Asset not found");
+  }
+});
+
+// Serve CSS files
+app.use("/:presentation/css", (req, res, next) => {
+  const presentation = req.params.presentation;
+  const cssPath = path.join(__dirname, presentation, "css");
+  if (fs.existsSync(cssPath)) {
+    express.static(cssPath)(req, res, next);
+  } else {
+    res.status(404).send("CSS not found");
+  }
+});
+
+// Serve all static files from presentation directories (fallback)
+app.use("/:presentation", (req, res, next) => {
+  const presentation = req.params.presentation;
+  const presentationPath = path.join(__dirname, presentation);
+
+  // Only serve static files if the presentation directory exists and it's not the README.md request
+  if (fs.existsSync(presentationPath) && !req.path.endsWith("README.md")) {
+    express.static(presentationPath)(req, res, next);
+  } else {
+    next();
+  }
+});
+
+// Serve markdown files with processed image paths
+app.get("/:presentation/README.md", (req, res) => {
+  const presentation = req.params.presentation;
+  const markdownPath = path.join(__dirname, presentation, "README.md");
+
+  if (fs.existsSync(markdownPath)) {
+    const content = fs.readFileSync(markdownPath, "utf8");
+
+    // Replace relative image paths with absolute paths
+    const processedContent = content.replace(
+      /!\[([^\]]*)\]\(images\/([^)]+)\)/g,
+      `![$1](/${presentation}/images/$2)`
+    );
+
+    res.set("Content-Type", "text/markdown; charset=utf-8");
+    res.send(processedContent);
+  } else {
+    res.status(404).send("Markdown file not found");
   }
 });
 
 function generatePresentationHTML(presentation, hasMarkdown) {
-  const title = presentation.split('-').map(word => 
-    word.charAt(0).toUpperCase() + word.slice(1)
-  ).join(' ');
+  const title = presentation
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   // Check for custom configuration
-  const configPath = path.join(__dirname, presentation, 'config.json');
+  const configPath = path.join(__dirname, presentation, "config.json");
   let config = {};
   if (fs.existsSync(configPath)) {
     try {
-      config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      config = JSON.parse(fs.readFileSync(configPath, "utf8"));
     } catch (e) {
       console.warn(`Warning: Could not parse config.json for ${presentation}`);
     }
   }
 
-  const theme = config.theme || 'black';
-  const transition = config.transition || 'slide';
+  const theme = config.theme || "black";
+  const transition = config.transition || "slide";
 
   return `
 <!DOCTYPE html>
@@ -111,7 +158,9 @@ function generatePresentationHTML(presentation, hasMarkdown) {
   <body>
     <div class="reveal">
       <div class="slides">
-        ${hasMarkdown ? `
+        ${
+          hasMarkdown
+            ? `
         <section
           data-markdown="/${presentation}/README.md"
           data-separator="^---$"
@@ -119,13 +168,15 @@ function generatePresentationHTML(presentation, hasMarkdown) {
           data-separator-notes="^Note:"
           data-charset="utf-8"
         ></section>
-        ` : `
+        `
+            : `
         <section>
           <h1>${title}</h1>
           <p>No README.md found for this presentation</p>
           <p>Please add content to ${presentation}/README.md</p>
         </section>
-        `}
+        `
+        }
       </div>
     </div>
 
@@ -185,8 +236,16 @@ function generatePresentationHTML(presentation, hasMarkdown) {
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`Available presentations:`);
-  console.log(`  - Node.js Introduction: http://localhost:${PORT}/?p=nodejs-intro`);
-  console.log(`  - TypeScript Introduction: http://localhost:${PORT}/?p=typescript-intro`);
-  console.log(`  - Serverlesspresso: http://localhost:${PORT}/?p=serverlesspresso`);
-  console.log(`  - Broken Access Control: http://localhost:${PORT}/?p=broken-access-control`);
+  console.log(
+    `  - Node.js Introduction: http://localhost:${PORT}/?p=nodejs-intro`
+  );
+  console.log(
+    `  - TypeScript Introduction: http://localhost:${PORT}/?p=typescript-intro`
+  );
+  console.log(
+    `  - Serverlesspresso: http://localhost:${PORT}/?p=serverlesspresso`
+  );
+  console.log(
+    `  - Broken Access Control: http://localhost:${PORT}/?p=broken-access-control`
+  );
 });
