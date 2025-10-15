@@ -52,13 +52,13 @@ npm run dev
    
    Content for first slide
    
-   ---
+   ------
    
    # Second Slide
    
    More content here
    
-   `-`
+   ---
    
    ## Vertical slide
    
@@ -73,8 +73,8 @@ npm run dev
 
 ## 📋 Markdown Syntax
 
-- **Horizontal slides**: Use `---` to separate slides
-- **Vertical slides**: Use `\`-\`` for vertical slides (sub-slides)
+- **Horizontal slides**: Use `------` to separate slides
+- **Vertical slides**: Use `---` for vertical slides (sub-slides)
 - **Speaker notes**: Add `Note:` followed by your notes
 - **Code highlighting**: Use fenced code blocks with language specification
 - **Math**: Use KaTeX syntax with `$` for inline or `$$` for block math
@@ -84,17 +84,17 @@ npm run dev
 ```markdown
 # Title Slide
 
----
+------
 
 # Main Topic
 
-`-`
+---
 
 ## Subtopic 1
 
 Content here
 
-`-`
+---
 
 ## Subtopic 2
 
@@ -103,7 +103,7 @@ More content
 Note:
 These are speaker notes that won't be visible to the audience
 
----
+------
 
 # Another Main Topic
 

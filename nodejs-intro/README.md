@@ -2,11 +2,11 @@
 
 JavaScript on the server
 
----
+------
 
 ## JavaScript refresher
 
-`-`
+---
 
 - language created in 1995 created for web development
 - weakly typed
@@ -16,7 +16,7 @@ JavaScript on the server
   - data can be organized in logical objects
   - has primitive and reference types
 
-`-`
+---
 
 - runs in the web browser that contains JS engine
   - Chrome/Chromium - [V8](https://v8.dev/)
@@ -25,7 +25,7 @@ JavaScript on the server
   - Edge - formerly [Chakra](https://github.com/microsoft/ChakraCore), switched to [V8](https://v8.dev/)
 - more on JS engines and V8 insides [here](https://blog.bitsrc.io/javascript-engines-an-overview-2162bffa1187)
 
----
+------
 
 ## What is Node.js
 
@@ -41,7 +41,7 @@ Node.js is a free, open-sourced, cross-platform JavaScript run-time environment 
 - allows to write FE & BE in single language
 - adds additional features to V8
 
-`-`
+---
 
 ### Node.js characteristics
 
@@ -49,7 +49,7 @@ Node.js is a free, open-sourced, cross-platform JavaScript run-time environment 
 1. Is not limited to the server - you can use it for utility scripts or for building tools
 1. Uses an event driven code for running your logic. Because of that, JavaScript thread is always free to handle new events and new incoming requests.
 
-`-`
+---
 
 ### Additional features
 
@@ -60,18 +60,18 @@ Node.js is a free, open-sourced, cross-platform JavaScript run-time environment 
 - `process` - object referencing to the actual computer process, allows for access to command-line arguments, environment variables and so on
 - non-blocking I/O (file system, HTTP requests)
 
----
+------
 
 ## Installing Node.js
 
-`-`
+---
 
 ### Bad way
 
 - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 - you'll soon find that each project may require different node version...
 
-`-`
+---
 
 ### Better way
 
@@ -82,7 +82,7 @@ Node.js is a free, open-sourced, cross-platform JavaScript run-time environment 
 - installing node: `nvm install ${version}`
 - switching node: `nvm use ${version}`
 
----
+------
 
 ## Node.js Hello World
 
@@ -90,28 +90,28 @@ Node.js is a free, open-sourced, cross-platform JavaScript run-time environment 
 - run snippet `console.log("Hello World")`
 - or put it in `.js` file and run it with `node ${file}` or in REPL `.load ${file}`
 
----
+------
 
 ## Simple HTTP server demo
 
----
+------
 
 ## Packages
 
 - lot of useful packages and components can be found at [https://www.npmjs.com/](https://www.npmjs.com/)
 - you can manage packages in your app with `npm` or `yarn`
 
----
+------
 
 ## npm
 
 - comes preinstalled with `node`
 
----
+------
 
 ## yarn
 
----
+------
 
 ## Resources
 

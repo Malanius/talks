@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Test</title>
+  </head>
+  <body>
+    <h1>Image Loading Test</h1>
+
+    <h2>Direct Image URLs:</h2>
+    <p>Testing if images can be loaded directly:</p>
+    <img
+      src="/serverlesspresso/images/serverlesspresso.png"
+      alt="Serverlesspresso Logo"
+      style="max-width: 300px"
+    />
+    <br /><br />
+    <img
+      src="/serverlesspresso/images/cloudday-display.png"
+      alt="Cloud Day Display"
+      style="max-width: 300px"
+    />
+
+    <h2>Relative Paths (as used in markdown):</h2>
+    <p>This simulates how markdown would reference images:</p>
+    <base href="/serverlesspresso/" />
+    <img
+      src="images/serverlesspresso.png"
+      alt="Serverlesspresso Logo Relative"
+      style="max-width: 300px"
+    />
+    <br /><br />
+    <img
+      src="images/cloudday-display.png"
+      alt="Cloud Day Display Relative"
+      style="max-width: 300px"
+    />
+
+    <script>
+      // Check for image load errors
+      document.querySelectorAll("img").forEach((img) => {
+        img.onload = () => console.log("✅ Loaded:", img.src);
+        img.onerror = () => console.error("❌ Failed to load:", img.src);
+      });
+    </script>
+  </body>
+</html>

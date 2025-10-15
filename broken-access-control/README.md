@@ -4,7 +4,7 @@
 
 ## Broken access control
 
----
+------
 
 # Description
 
@@ -12,11 +12,11 @@ Broken or missing access control allows users to act outside of their intended p
 
 This can lead to unauthorized information disclosure, modification or destruction of data or users performing actions outside their limits.
 
----
+------
 
 # Common access control vulnerabilities
 
-`-`
+---
 
 ## Bypassing access control checks
 
@@ -25,19 +25,19 @@ This can lead to unauthorized information disclosure, modification or destructio
 - HTML page
 - using API attack tool
 
-`-`
+---
 
 ## Changing primary key
 
 to another user's record, permitting view or modification of someone else's account
 
-`-`
+---
 
 ## Privilege escalation
 
 acting as user without login, or as admin as a regular user
 
-`-`
+---
 
 ## Metadata manipulation
 
@@ -46,29 +46,29 @@ acting as user without login, or as admin as a regular user
 - manipulating hidden field
 - abusing JWT invalidation
 
-`-`
+---
 
 ## CORS misconfiguration
 
 allowing unauthorized API access
 
-`-`
+---
 
 ## Force browsing
 
 to authenticated pages as an unauthenticated user or to privileged pages as a standard user
 
-`-`
+---
 
 ## Accessing unprotected API
 
 with missing access controls for POST, PUT and DELETE.
 
----
+------
 
 # Examples
 
-`-`
+---
 
 ## Bank account URL
 
@@ -82,7 +82,7 @@ https://safe.bank/dashboard.py?accountId=4462
 {"AccountID": 4462, "Balance": "$123,456.78"}
 ```
 
-`-`
+---
 
 ## With changed parameter
 
@@ -96,7 +96,7 @@ https://safe.bank/dashboard.py?accountId=4463
 {"AccountID": 4463, "Balance": "$167,183.09"}
 ```
 
-`-`
+---
 
 ## Code comment revealing function
 
@@ -109,7 +109,7 @@ JQuery to perform several actions:
   o Parameters (optional): accountID, customerID, transactionDate
 ```
 
-`-`
+---
 
 ```
 https://safe.bank/customer_search.py?limit=5
@@ -127,45 +127,45 @@ https://safe.bank/customer_search.py?limit=5
 ]
 ```
 
----
+------
 
 # Prevention
 
-`-`
+---
 
 ## With the exception of public resources, deny by default
 
-`-`
+---
 
 ## Implement access control mechanisms once
 
 re-use them throughout the application, including minimizing CORS usage
 
-`-`
+---
 
 ## Enforce record ownership
 
 Model access controls should enforce record ownership, rather than accepting that the user can create, read, update, or delete any record.
 
-`-`
+---
 
 ## Log access control failures
 
-`-`
+---
 
 ## Rate limit API and controller access
 
 prevents using automated tooling for attack
 
-`-`
+---
 
 ## JWT tokens should be invalidated on the server after logout
 
----
+------
 
 # Useful resources
 
-`-`
+---
 
 ## OWASP documentation
 
@@ -173,7 +173,7 @@ prevents using automated tooling for attack
 - <https://owasp.org/www-project-proactive-controls/v3/en/c7-enforce-access-controls>
 - <https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/01-Testing_Directory_Traversal_File_Include.html>
 
-`-`
+---
 
 ## Example apps to try
 
@@ -181,6 +181,6 @@ prevents using automated tooling for attack
 - <https://github.com/bkimminich/juice-shop>
 - <https://github.com/rapid7/metasploitable3/>
 
----
+------
 
 # DEMO TIME
