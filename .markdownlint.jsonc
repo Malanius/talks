@@ -1,0 +1,4 @@
+{
+    "MD003": false, // Presenterm requires setex headers for slide titles, still wana use MD headers for styling
+    "MD013": false
+}
