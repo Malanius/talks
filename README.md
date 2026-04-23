@@ -8,3 +8,4 @@ Various talks I had over the time who knows where...
 - [Node.js intro](nodejs-intro/README.md), 2020-09 @ Frontend Chapter meeting, Assist
 - [Broken access control](broken-access-control/index.html), 2020-?? @ Security Chapter meeting, Assist; part of series where we went through OWASP Top 10
 - [Serverlesspresso](serverlesspresso/README.md), 2025-03-12 @ Vacasa Talks, Vacasa Prague
+- [Conventional Commits](conventional-commits/README.md), 2026-04-23 @ Raifaisen Bank Czechia
