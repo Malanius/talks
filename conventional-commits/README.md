@@ -354,11 +354,11 @@ Questions?
 
 <!-- end_slide -->
 
-<!-- jump_to_middle -->
-
 Thank You
 ---
 
 ```text
 feat(you): attend this talk and never write "fix stuff" again
 ```
+
+![talk slides](talk-slides.png)
